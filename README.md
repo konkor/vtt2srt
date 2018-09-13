@@ -6,10 +6,7 @@
 # [VTT to SRT Converter](https://github.com/konkor/vtt2srt)
 
 
-VTT2SRT is an GPLv3-licensed open source project focused on desktop users. It's an independent project with its ongoing development made possible entirely thanks to the support. You will also support my other interesting community projects. If you'd like to help the project and want to join to it, please consider:
-
-- [Become a backer or sponsor on Patreon](https://www.patreon.com/konkor).
-- [One-time donation via PayPal or Patreon.](#donations)
+VTT2SRT is an GPLv3-licensed open source project focused on desktop users. It's an independent project with its ongoing development made possible entirely thanks to the support.
 
 Please, consider to support the project and make it better!
 
@@ -18,19 +15,24 @@ Please, consider to support the project and make it better!
 ## How-to use
 1. Create `FILE.srt`
 ```
-vtt2srt FILE.VTT```
+vtt2srt FILE.VTT
+```
 2. Create `FILE1.srt, FILE2.srt, FILEN.srt`
 ```
-vtt2srt FILE1.VTT FILE2.VTT FILEN.VTT```
+vtt2srt FILE1.VTT FILE2.VTT FILEN.VTT
+```
 3. Specify output (single file only)
 ```
-vtt2srt FILE.VTT FILENAME.SRT```
+vtt2srt FILE.VTT FILENAME.SRT
+```
 3. Using pipes
 ```
-cat  FILE.VTT | vtt2srt > FILENAME.SRT```
+cat  FILE.VTT | vtt2srt > FILENAME.SRT
+```
 3. Using stdin for input and FILENAME for output
 ```
-cat  FILE.VTT | vtt2srt FILENAME.SRT```
+cat  FILE.VTT | vtt2srt FILENAME.SRT
+```
 
 ## Contributions
 * Report [a bug](https://github.com/konkor/vtt2srt/issues).
