@@ -19,6 +19,9 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
+const Format = imports.format;
+
+String.prototype.format = Format.format;
 
 const txt = "USAGE: [\"VTT\" |] vtt2srt [FILE_VTT] [OUT_FILE_SRT | > OUTPUT STREAM]";
 
@@ -69,19 +72,27 @@ var Converter = new Lang.Class ({
         text.split ("\n").forEach ((s)=>{
             s = s.replace ("\r","");
             if ((s.length == 0) && time) {
-                srt += "\n";
+                srt = srt.trim() + "\n\n";
                 time = false;
                 index++;
             } else if (!time && this.is_time (s)) {
                 time = true;
-                srt += index + "\n" + s.replace (/\./gi,",") + "\n";
+                var ar = s.replace (/\./gi,",").split (" ");
+                if (ar.length > 2)
+                    srt += "%d\n%s --> %s\n".format (index,ar[0],ar[2]);
             } else if ((s.length > 0) && time) {
-                srt += s + "\n";
+                srt += this.clear (s);
             }
         });
         return srt;
     },
     
+    clear: function (text) {
+        let s = text.replace (/<.*?c>/gi,"");
+        s = s.replace (/<c\.color.*?>/gi,"") + " ";
+        return s;
+    },
+
     is_time: function (text) {
         if (text.length < 27) return false;
         if (text.indexOf (" --> ") == -1) return false;
@@ -89,7 +100,7 @@ var Converter = new Lang.Class ({
         if (text.indexOf (".") < 1) return false;
         return true;
     },
-    
+
     get_contents: function (filename) {
         let [res,data] = GLib.file_get_contents (filename);
         if (res) return data.toString ();
