@@ -45,7 +45,7 @@ var Converter = new Lang.Class ({
     vfunc_startup: function() {
         this.parent();
     },
-    
+
     vfunc_command_line: function(cmd) {
         let text = this.get_stdin ();
         if (text) text = this.convert (text);
@@ -66,7 +66,7 @@ var Converter = new Lang.Class ({
         });
         return 0;
     },
-    
+
     convert: function (text) {
         let srt = "", index = 1, time = false;
         text.split ("\n").forEach ((s)=>{
@@ -86,7 +86,7 @@ var Converter = new Lang.Class ({
         });
         return srt;
     },
-    
+
     clear: function (text) {
         let s = text.replace (/<.*?c>/gi,"");
         s = s.replace (/<c\.color.*?>/gi,"") + " ";
@@ -108,15 +108,15 @@ var Converter = new Lang.Class ({
     },
 
     set_contents: function (filename, text) {
-        //if (uris.length == 1 && !output_file) print (text); 
+        //if (uris.length == 1 && !output_file) print (text);
         return GLib.file_set_contents (filename, text);
     },
-    
+
     srtname: function (filename) {
         if (uris.length < 2 && output_file) return output_file;
         return filename.toLowerCase().replace (".vtt",".srt");
     },
-    
+
     _is_vtt: function (filename) {
         if (!filename) return false;
         if (!filename.toLowerCase().endsWith(".vtt")) return false;
@@ -124,7 +124,7 @@ var Converter = new Lang.Class ({
         if (!file.query_exists (null)) return false;
         return true;
     },
-    
+
     get_stdin: function () {
         let s = "";
         let channel = GLib.IOChannel.unix_new(0);
